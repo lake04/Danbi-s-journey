@@ -15,7 +15,9 @@ public class playerStats
     public float attackspeed = 1f;
     public float damag = 2f;
     public float moveSpeed = 5f;
+    public bool isShoting = true;
 }
+#region е╦ют
 public enum PlayerType
 {
     basic,
@@ -25,12 +27,17 @@ public enum PlayerType
     ninja,
     legend
 }
-
+#endregion
 
 public class Player : MonoBehaviour
 {
-    playerStats stats = new playerStats();
-  
+    public playerStats stats = new playerStats();
+    
+    [Header("Type")]
+    public PlayerType type;
+    [SerializeField]
+    private BasePlayer basePlayer;
+
     private Rigidbody2D rigidbody2D;
     private Vector3 moveDirection = Vector3.zero;
     private SpriteRenderer spriteRenderer;
@@ -56,6 +63,8 @@ public class Player : MonoBehaviour
         stats.Mp = stats.maxMp;
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        type = PlayerType.basic;
+        basePlayer = GetComponent<BasePlayer>();
     }
    /* private void OnDrawGizmos()
     {
@@ -72,9 +81,17 @@ public class Player : MonoBehaviour
         {
             Jump();
         }
-        if(Input.GetKeyDown(KeyCode.Q))
+        if(Input.GetKeyDown(KeyCode.Q) && stats.isShoting)
         {
             StartCoroutine(skil1());
+        }
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log("skil2");
+            if(type == PlayerType.basic)
+            {
+                StartCoroutine(basePlayer.skil2());
+            }
         }
         attack();
     }
@@ -151,8 +168,10 @@ public class Player : MonoBehaviour
     }
     public IEnumerator skil1()
     {
+        stats.isShoting = false;
         Instantiate(ball,gameObject.transform.position,Quaternion.identity);
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(3f);
+        stats.isShoting = true;
     }
     #endregion
 

@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Enemy : MonoBehaviour
 {
     private IObjectPool<Enemy> _ManagerPool;
+    [SerializeField]
+    private BasePlayer _Player;
 
     #region enemy¡§∫∏
     public float maxHp = 10;
@@ -30,6 +33,7 @@ public class Enemy : MonoBehaviour
         rigidbody2D = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         player = FindAnyObjectByType<Player>();
+        _Player = FindAnyObjectByType<BasePlayer>();
     }
 
     private void Start()
@@ -46,8 +50,14 @@ public class Enemy : MonoBehaviour
     }
 
     public void DestroyEnemy()
-    { 
-        _ManagerPool.Release(this);
+    {
+        if (player.type == PlayerType.basic)
+        {
+            _Player.PassiveSkill();
+            _ManagerPool.Release(this);
+        }
+        else _ManagerPool.Release(this);
+
     }
 
     public void TakeDamage(float damage)
@@ -59,7 +69,12 @@ public class Enemy : MonoBehaviour
             StartCoroutine(SkillDamagedRoutine(1f));
         }
         if(hp <=0)
-        DestroyEnemy();
+        {
+
+            DestroyEnemy();
+            
+        }
+        
     }
 
     public IEnumerator SkillDamagedRoutine(float skillTime)
