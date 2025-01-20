@@ -42,12 +42,10 @@ public class penetratingbead : Skil
                 Destroy(gameObject);
             }
         }
-        
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
       StartCoroutine(skil1(collider));
-
     }
     protected override IEnumerator skil1(Collider2D collider)
     {

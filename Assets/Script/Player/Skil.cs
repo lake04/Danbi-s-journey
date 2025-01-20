@@ -5,8 +5,8 @@ using UnityEngine;
 public class Skil : MonoBehaviour
 {
     public float cooltime;
-    
-    public void PassiveSkill()
+
+    protected virtual void PassiveSkill()
     {
        
     }
@@ -15,9 +15,11 @@ public class Skil : MonoBehaviour
     {
         yield return new WaitForSeconds(cooltime);
     }
-    
-    public IEnumerator skil2()
+
+    protected virtual IEnumerator skil2()
     {
         yield return new WaitForSeconds(cooltime);
     }
 }
+
+

@@ -16,6 +16,17 @@ public class playerStats
     public float damag = 2f;
     public float moveSpeed = 5f;
 }
+public enum PlayerType
+{
+    basic,
+    fire,
+    electricity,
+    ice,
+    ninja,
+    legend
+}
+
+
 public class Player : MonoBehaviour
 {
     playerStats stats = new playerStats();
@@ -74,7 +85,6 @@ public class Player : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground")) isJump = true;
-
     }
     #region ¿Ãµø
     void Move()
@@ -142,7 +152,6 @@ public class Player : MonoBehaviour
     public IEnumerator skil1()
     {
         Instantiate(ball,gameObject.transform.position,Quaternion.identity);
-
         yield return new WaitForSeconds(1f);
     }
     #endregion
@@ -151,6 +160,4 @@ public class Player : MonoBehaviour
     {
 
     }
-
-    
 }
