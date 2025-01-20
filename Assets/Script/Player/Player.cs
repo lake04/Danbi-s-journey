@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(skil1());
         }
+        
         attack();
     }
     void FixedUpdate()
@@ -154,6 +155,7 @@ public class Player : MonoBehaviour
         Instantiate(ball,gameObject.transform.position,Quaternion.identity);
         yield return new WaitForSeconds(1f);
     }
+   
     #endregion
 
     public void HpDown(int damgae)
