@@ -45,6 +45,8 @@ public class penetratingbead : Skil
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
+        //여기 버그 있음
+        
       StartCoroutine(skil1(collider));
     }
     protected override IEnumerator skil1(Collider2D collider)
