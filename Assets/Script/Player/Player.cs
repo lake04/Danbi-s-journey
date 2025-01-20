@@ -18,12 +18,12 @@ public class playerStats
 }
 public enum PlayerType
 {
-    basic,
-    fire,
-    electricity,
-    ice,
-    ninja,
-    legend
+    basic, //기본
+    fire, //불
+    electricity, //전기
+    ice, //얼음
+    ninja, //닌자
+    legend //롤
 }
 
 
