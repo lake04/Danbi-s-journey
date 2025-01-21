@@ -54,9 +54,7 @@ public class penetratingbead : Skil
             {
                 Destroy(gameObject);
             }
-
         }
-
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
