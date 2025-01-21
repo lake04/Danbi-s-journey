@@ -261,7 +261,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyPrefab: {fileID: 2621095431269154045, guid: 7d9d168d9bd223943bdc6b4c08843bc4, type: 3}
+<<<<<<< HEAD
   spawntime: 1
+=======
+>>>>>>> player
 --- !u!4 &352393858
 Transform:
   m_ObjectHideFlags: 0
