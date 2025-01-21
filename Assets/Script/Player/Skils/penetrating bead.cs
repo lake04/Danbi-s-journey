@@ -15,7 +15,6 @@ public class penetratingbead : Skil
     GameObject player;
     private Vector3 startPoint;
     private bool returning = false;
-    private bool isFirst = true;
 
     private void Awake()
     {
@@ -28,7 +27,6 @@ public class penetratingbead : Skil
     {
         stats.damag = 3;
         this.cooltime = 2;
-        //startPoint = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y,0).normalized;
         startPoint = gameObject.transform.position;
         if (spriteRenderer.flipX == true)
         {
@@ -37,7 +35,6 @@ public class penetratingbead : Skil
         else rb.AddForce(Vector3.left * speed, ForceMode2D.Impulse);
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (!returning)
