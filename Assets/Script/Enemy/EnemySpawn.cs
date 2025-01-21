@@ -14,18 +14,14 @@ public class EnemySpawn : MonoBehaviour
 
     private void Awake()
     {
-<<<<<<< HEAD
+
         StartCoroutine(Spawntime());
-=======
+
         
         area = GetComponent<BoxCollider2D>();
-        //for (int i = 0; i < 5; i++)
-        //{
-        //    var enemy = _pool.Get();
-        //}
+      
         StartCoroutine(EnanySpawn());
 
->>>>>>> main
     }
 
 

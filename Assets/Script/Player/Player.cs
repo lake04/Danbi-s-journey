@@ -76,9 +76,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(skil1());
         }
-<<<<<<< HEAD
-        
-=======
+
         if(Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("skil2");
@@ -87,7 +85,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(basePlayer.skil2());
             }
         }
->>>>>>> main
+
         attack();
     }
     void FixedUpdate()
