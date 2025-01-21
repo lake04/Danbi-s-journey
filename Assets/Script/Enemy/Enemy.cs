@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
 
     public float attackDistance;
     public float attackTime;
+    public int damage;
     #endregion
 
 
@@ -103,6 +104,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual IEnumerator Attack(float attackTime)
     {
+        player.HpDown(damage);
         yield return new WaitForSeconds(attackTime);
     }
 }

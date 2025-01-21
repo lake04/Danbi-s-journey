@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Soldier : Enemy
 {
-
     void Start()
     {
         this.maxHp = 10;
@@ -13,6 +12,7 @@ public class Soldier : Enemy
         this.speed = 3f;
         this.attackDistance = 2f;
         this.attackTime = 2.5f;
+        this.damage = 1;
     }
 
     void Update()
@@ -30,6 +30,7 @@ public class Soldier : Enemy
     {
         yield return new WaitForSeconds(this.attackTime);
         Debug.Log("PlayerAttack");
-        
+        player.HpDown(this.damage);
+
     }
 }

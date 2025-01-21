@@ -177,6 +177,11 @@ public class Player : MonoBehaviour
 
     public void HpDown(int damgae)
     {
-
+        if(stats.Hp > 0)
+        {
+            Debug.Log("HpDown");
+            stats.Hp-=damgae;
+        }
+        else Destroy(this.gameObject);
     }
 }
