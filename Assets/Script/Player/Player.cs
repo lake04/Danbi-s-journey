@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(skil1());
         }
+        
         if(Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("skil2");

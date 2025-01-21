@@ -10,8 +10,9 @@ public class penetratingbead : Skil
     public float returnSpeed = 5f;
     public float maxDistance = 5f;
     private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
 
-    GameObject player; 
+    GameObject player;
     private Vector3 startPoint;
     private bool returning = false;
 
@@ -19,67 +20,44 @@ public class penetratingbead : Skil
     {
         player = GameObject.FindGameObjectWithTag("Player");
         spriteRenderer = player.GetComponent<Player>().spriteRenderer;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Start()
     {
         stats.damag = 3;
         this.cooltime = 2;
-        Destroy(this.gameObject, 2f);
-        //startPoint = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y,0).normalized;
         startPoint = gameObject.transform.position;
+        if (spriteRenderer.flipX == true)
+        {
+            rb.AddForce(Vector3.right * speed, ForceMode2D.Impulse);
+        }
+        else rb.AddForce(Vector3.left * speed, ForceMode2D.Impulse);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (spriteRenderer.flipX == true) //¿ÞÂÊ
+        if (!returning)
         {
-            if (!returning)
+            /*  transform.Translate(Vector3.right * speed * Time.deltaTime);*/
+            if (Vector3.Distance(startPoint, transform.position) >= maxDistance)
             {
-                transform.Translate(Vector3.right * speed * Time.deltaTime);
-                if (Vector3.Distance(startPoint, transform.position) >= maxDistance)
-                {
-                    returning = true;
-                }
-            }
-            else
-            {
-                Vector3 directionToStart = (startPoint - transform.position).normalized;
-                transform.Translate(directionToStart * returnSpeed * Time.deltaTime);
-
-                if (Vector3.Distance(startPoint, transform.position) <= 0.1f)
-                {
-                    Destroy(gameObject);
-                }
+                returning = true;
             }
         }
         else
         {
-            if (!returning)
-            {
-                transform.Translate(Vector3.left * speed * Time.deltaTime);
-                if (Vector3.Distance(startPoint, transform.position) >= maxDistance)
-                {
-                    returning = true;
-                }
-            }
-            else
-            {
-                Vector3 directionToStart = (startPoint - transform.position).normalized;
-                transform.Translate(directionToStart * returnSpeed * Time.deltaTime);
+            Vector3 directionToStart = (player.transform.position - transform.position).normalized;
+            transform.Translate(directionToStart * returnSpeed * Time.deltaTime);
 
-                if (Vector3.Distance(startPoint, transform.position) <= 0.1f)
-                {
-                    Destroy(gameObject);
-                }
+            if (Vector3.Distance(player.transform.position, transform.position) <= 0.1f)
+            {
+                Destroy(gameObject);
             }
         }
-        
     }
     private void OnTriggerEnter2D(Collider2D collider)
     {
-
         StartCoroutine(skil1(collider));
     }
     protected internal override IEnumerator skil1(Collider2D collider)
