@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - Fire
+  - electricity
+  - ice
+  - ninja
+  - legend
   layers:
   - Default
   - TransparentFX

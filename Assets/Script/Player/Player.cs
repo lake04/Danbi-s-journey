@@ -20,12 +20,12 @@ public class playerStats
 #region 타입
 public enum PlayerType
 {
-    basic,
-    fire,
-    electricity,
-    ice,
-    ninja,
-    legend
+    basic, //기본
+    fire, //불
+    electricity, //전기
+    ice, //얼음
+    ninja, //닌자
+    legend //롤
 }
 #endregion
 
@@ -76,6 +76,7 @@ public class Player : MonoBehaviour
         {
             StartCoroutine(skil1());
         }
+
         if(Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("skil2");
@@ -84,6 +85,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(basePlayer.skil2());
             }
         }
+
         attack();
     }
     void FixedUpdate()
@@ -164,6 +166,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
         stats.isShoting = true;
     }
+   
     #endregion
 
     public void HpDown(int damgae)
