@@ -39,8 +39,7 @@ public class Player : MonoBehaviour
     private BasePlayer basePlayer;
 
     private Rigidbody2D rigidbody2D;
-    private Vector3 moveDirection = Vector3.zero;
-    private SpriteRenderer spriteRenderer;
+    public SpriteRenderer spriteRenderer;
     public Vector3 dir;
 
     private bool isJump;
@@ -66,15 +65,7 @@ public class Player : MonoBehaviour
         type = PlayerType.basic;
         basePlayer = GetComponent<BasePlayer>();
     }
-   /* private void OnDrawGizmos()
-    {
-        //공격 범위
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(leftPos.position, boxSize);
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(rigntPos.position, boxSize);
-    }*/
+ 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
@@ -109,7 +100,7 @@ public class Player : MonoBehaviour
         if (Input.GetButton("Horizontal"))
         {
             float h = Input.GetAxisRaw("Horizontal");
-             dir = new Vector3(h, 0f, 0f).normalized;
+            dir = new Vector3(h, 0f, 0f).normalized;
             transform.Translate(dir * stats.moveSpeed * Time.deltaTime);
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == 1;
         }
@@ -169,8 +160,8 @@ public class Player : MonoBehaviour
     public IEnumerator skil1()
     {
         stats.isShoting = false;
-        Instantiate(ball,gameObject.transform.position,Quaternion.identity);
-        yield return new WaitForSeconds(3f);
+        Instantiate(ball, transform.position, Quaternion.identity);
+        yield return new WaitForSeconds(2.5f);
         stats.isShoting = true;
     }
     #endregion
@@ -182,6 +173,6 @@ public class Player : MonoBehaviour
             Debug.Log("HpDown");
             stats.Hp-=damgae;
         }
-        else Destroy(this.gameObject);
+       /* else Destroy(this.gameObject);*/
     }
 }
