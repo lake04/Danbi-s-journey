@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
     public IEnumerator skil1()
     {
         stats.isShoting = false;
-        Instantiate(ball, transform.position, Quaternion.identity);
+        Instantiate(ball, transform.position , Quaternion.identity);
         yield return new WaitForSeconds(2.5f);
         stats.isShoting = true;
     }
