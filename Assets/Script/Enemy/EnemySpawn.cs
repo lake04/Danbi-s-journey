@@ -9,17 +9,12 @@ public class EnemySpawn : MonoBehaviour
     private GameObject _enemyPrefab;
     private BoxCollider2D area;
     private IObjectPool<Enemy> _pool;
+    public float spawntime = 1f;
    
 
     private void Awake()
     {
-        _pool = new ObjectPool<Enemy>(CreateEnemy,OnGetEnemy,OnRelwaseEnemy,OnDestroyEnemy,maxSize:5);
-        area = GetComponent<BoxCollider2D>();
-        for (int i = 0; i < 5; i++)
-        {
-            var enemy = _pool.Get();
-        }
-       
+        StartCoroutine(Spawntime());
     }
 
     
@@ -64,6 +59,15 @@ public class EnemySpawn : MonoBehaviour
 
         return spawnPos;
     }
-
-   
+    public IEnumerator Spawntime()
+    {
+        Debug.Log("spawn");
+        _pool = new ObjectPool<Enemy>(CreateEnemy, OnGetEnemy, OnRelwaseEnemy, OnDestroyEnemy, maxSize: 5);
+        area = GetComponent<BoxCollider2D>();
+        for (int i = 0; i < 5; i++)
+        {
+            yield return new WaitForSeconds(spawntime);
+            var enemy = _pool.Get();
+        }
+    }
 }

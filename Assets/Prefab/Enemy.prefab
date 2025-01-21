@@ -102,7 +102,7 @@ MonoBehaviour:
   maxHp: 10
   hp: 0
   isSkilldDamaged: 0
-  distance: 0
+  distance: 2
   isLayer:
     serializedVersion: 2
     m_Bits: 64
