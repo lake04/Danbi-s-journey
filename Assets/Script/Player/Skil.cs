@@ -6,17 +6,17 @@ public class Skil : MonoBehaviour
 {
     public float cooltime;
 
-    protected virtual void PassiveSkill()
+    protected internal virtual void PassiveSkill()
     {
        
     }
 
-    protected virtual IEnumerator skil1(Collider2D collider)
+    protected virtual internal IEnumerator skil1(Collider2D collider)
     {
         yield return new WaitForSeconds(cooltime);
     }
 
-    protected virtual IEnumerator skil2()
+    protected virtual internal IEnumerator skil2()
     {
         yield return new WaitForSeconds(cooltime);
     }
