@@ -16,6 +16,7 @@ public class playerStats
     public float damag = 2f;
     public float moveSpeed = 5f;
     public bool isShoting = true;
+    public bool isSkil2 = true;
 }
 #region е╦ют
 public enum PlayerType
@@ -37,13 +38,15 @@ public class Player : MonoBehaviour
     public PlayerType type;
     [SerializeField]
     private BasePlayer basePlayer;
+    [SerializeField]
+    private FirePlayer firePlayer;
 
     private Rigidbody2D rigidbody2D;
     public SpriteRenderer spriteRenderer;
     public Vector3 dir;
 
     private bool isJump;
-    private int jumpPower = 5;
+    public int jumpPower = 5;
 
     [Header("Attack")]
     [SerializeField]
@@ -62,8 +65,9 @@ public class Player : MonoBehaviour
         stats.Mp = stats.maxMp;
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        type = PlayerType.basic;
+        type = PlayerType.fire;
         basePlayer = GetComponent<BasePlayer>();
+        firePlayer = GetComponent<FirePlayer>();
     }
  
     void Update()
@@ -74,15 +78,27 @@ public class Player : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.Q) && stats.isShoting)
         {
-            StartCoroutine(skil1());
+            
+            if (type == PlayerType.basic)
+            {
+                StartCoroutine(skil1());
+            }
+            if (type == PlayerType.fire)
+            {
+                StartCoroutine(firePlayer.skil1());
+            }
         }
         
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E) && stats.isSkil2)
         {
             Debug.Log("skil2");
             if(type == PlayerType.basic)
             {
                 StartCoroutine(basePlayer.skil2());
+            }
+            if (type == PlayerType.fire)
+            {
+                StartCoroutine(firePlayer.skil2());
             }
         }
         attack();
@@ -111,8 +127,6 @@ public class Player : MonoBehaviour
     {
         if (!isJump)
             return;
-
-        //Prevent Velocity amplification.
         rigidbody2D.velocity = Vector2.zero;
 
         Vector2 jumpVelocity = new Vector2(0, jumpPower);

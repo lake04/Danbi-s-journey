@@ -9,11 +9,11 @@ public class EnemySpawn : MonoBehaviour
     private GameObject _enemyPrefab;
     private BoxCollider2D area;
     private IObjectPool<Enemy> _pool;
-   
+
 
     private void Awake()
     {
-        
+
         area = GetComponent<BoxCollider2D>();
         //for (int i = 0; i < 5; i++)
         //{
@@ -32,7 +32,7 @@ public class EnemySpawn : MonoBehaviour
     private Enemy CreateEnemy()
     {
         Vector3 spawnPos = GetRandomPosition();
-        Enemy enemy = Instantiate(_enemyPrefab, spawnPos,Quaternion.identity).GetComponent<Enemy>();
+        Enemy enemy = Instantiate(_enemyPrefab, spawnPos, Quaternion.identity).GetComponent<Enemy>();
         enemy.SetManagePool(_pool);
         return enemy;
     }

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class penetratingbead : Skil
+public class penetratingbead : MonoBehaviour
 {
     playerStats stats = new playerStats();
     public float speed = 5f;
     public float returnSpeed = 5f;
     public float maxDistance = 5f;
-    private SpriteRenderer spriteRenderer;
+    public float cooltime = 2f;
+    public SpriteRenderer playrSpriteRenderer;
+    public SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
     GameObject player;
@@ -19,27 +21,33 @@ public class penetratingbead : Skil
     private void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        spriteRenderer = player.GetComponent<Player>().spriteRenderer;
+        playrSpriteRenderer = player.GetComponent<Player>().spriteRenderer;
         rb = GetComponent<Rigidbody2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void Start()
     {
         stats.damag = 3;
-        this.cooltime = 2;
+        cooltime = 2;
         startPoint = gameObject.transform.position;
-        if (spriteRenderer.flipX == true)
+        if (playrSpriteRenderer.flipX == true)
         {
             rb.AddForce(Vector3.right * speed, ForceMode2D.Impulse);
+            spriteRenderer.flipX = false;
         }
-        else rb.AddForce(Vector3.left * speed, ForceMode2D.Impulse);
+        else
+        {
+            rb.AddForce(Vector3.left * speed, ForceMode2D.Impulse);
+            spriteRenderer.flipX = true;
+        }
+
     }
 
     void Update()
     {
         if (!returning)
         {
-            /*  transform.Translate(Vector3.right * speed * Time.deltaTime);*/
             if (Vector3.Distance(startPoint, transform.position) >= maxDistance)
             {
                 returning = true;
@@ -60,7 +68,7 @@ public class penetratingbead : Skil
     {
         StartCoroutine(skil1(collider));
     }
-    protected internal override IEnumerator skil1(Collider2D collider)
+    private IEnumerator skil1(Collider2D collider)
     {
         Debug.Log("skil1");
         if (collider.CompareTag("Enemy"))

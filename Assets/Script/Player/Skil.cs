@@ -5,13 +5,14 @@ using UnityEngine;
 public class Skil : MonoBehaviour
 {
     public float cooltime;
+    public bool isPassive = false;  
 
-    protected internal virtual void PassiveSkill()
+    protected internal virtual IEnumerator PassiveSkill()
     {
-       
+        yield return new WaitForSeconds(cooltime);
     }
 
-    protected virtual internal IEnumerator skil1(Collider2D collider)
+    protected virtual internal IEnumerator skil1()
     {
         yield return new WaitForSeconds(cooltime);
     }
