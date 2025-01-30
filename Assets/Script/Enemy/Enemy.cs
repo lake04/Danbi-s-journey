@@ -84,6 +84,7 @@ public class Enemy : MonoBehaviour
             _ManagerPool.Release(this);
         }
         else _ManagerPool.Release(this);
+     
     }
 
     public IEnumerator FireDamage()
