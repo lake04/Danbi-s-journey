@@ -10,6 +10,7 @@ public class Penetratingbeadfascination : MonoBehaviour
     public float maxDistance = 5f;
     public float fascinationCooltime = 10f;
     public SpriteRenderer spriteRenderer;
+    public Player playerst;
 
     private Vector3 startPoint;
     private bool returning = false;
@@ -18,6 +19,7 @@ public class Penetratingbeadfascination : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("Player");
+        playerst = FindAnyObjectByType<Player>();
         
         spriteRenderer = player.GetComponent<Player>().spriteRenderer;
         Destroy(this.gameObject, 2f);
@@ -48,6 +50,12 @@ public class Penetratingbeadfascination : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Debug.Log("매혹");
+            Destroy(gameObject);
+        }
+        if (collision.gameObject.CompareTag("FireEnemy"))
+        {
+            Debug.Log("매혹");
+            playerst.type = PlayerType.fire;
             Destroy(gameObject);
         }
         yield return new WaitForSeconds(fascinationCooltime);

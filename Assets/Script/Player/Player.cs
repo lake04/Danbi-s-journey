@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
         stats.Mp = stats.maxMp;
         rigidbody2D = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        type = PlayerType.fire;
+        type = PlayerType.basic;
         basePlayer = GetComponent<BasePlayer>();
         firePlayer = GetComponent<FirePlayer>();
     }
