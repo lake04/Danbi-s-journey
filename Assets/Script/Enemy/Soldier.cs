@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Soldier : Enemy
 {
-    void Start()
+     void Start()
     {
         this.maxHp = 10;
         this.hp = maxHp;
@@ -17,12 +16,11 @@ public class Soldier : Enemy
 
     void Update()
     {
-        Rotate();
+        Move();
         float dist = Vector2.Distance(gameObject.transform.position,player.transform.position);
         if (dist <= attackDistance)
         {
             StartCoroutine(Attack(attackTime));
-
         }
     }
 

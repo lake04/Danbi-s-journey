@@ -10,6 +10,7 @@ public class BasePlayer : Skil
     void Start()
     {
         this.cooltime = 2f;
+        this.isPassive = true;
     }
 
     void Update()
@@ -17,9 +18,10 @@ public class BasePlayer : Skil
         
     }
 
-    protected internal override void PassiveSkill()
+    protected internal override IEnumerator PassiveSkill()
     {
         Debug.Log("체력 회복");
+        yield return new WaitForSeconds(cooltime);
         player.stats.Hp += 2;
     }
     protected internal override IEnumerator skil2()

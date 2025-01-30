@@ -1,20 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Hart : MonoBehaviour
 {
+    [SerializeField]
+    public Penetratingbeadfascination Pf;
     public GameObject hart;
+    public bool ready = true;
+
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (ready == true)
         {
-            StartCoroutine(fascination());
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                StartCoroutine(Ready());
+            }
         }
     }
     public IEnumerator fascination()  //∏≈»§
     {
         Instantiate(hart, gameObject.transform.position, Quaternion.identity);
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
+    }
+    private IEnumerator Ready()
+    {
+        StartCoroutine(fascination());
+        this.ready = false;
+        yield return new WaitForSeconds(10f);
+        this .ready = true;
     }
 }
